@@ -1,0 +1,27 @@
+{
+  "name": "calculatesquares",
+  "version": "1.0.0",
+  "description": "Node js Rest API to calculate max size of squares that can fit the rectangle",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha",
+    "test-with-coverage": "nyc --reporter=text mocha"
+  },
+  "author": "Kerolos Sarofem",
+  "license": "ISC",
+  "dependencies": {
+    "angular-bootstrap-colorpicker": "^3.0.32",
+    "angularjs-color-picker": "^3.4.8",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "node-mocks-http": "^1.7.3",
+    "nodemon": "^1.18.9",
+    "nyc": "^13.1.0"
+  }
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Draw Rectangle</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+        
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/colorpicker.css" rel="stylesheet" type="text/css">
+        <script src="js/script.js"></script>
+        <script src="js/bootstrap-colorpicker-module.js"></script>
+    </head>
+    <body ng-app="SquaresInRectangle">
+        <div class="center" ng-controller="DrawController">
+            <div class="title">Draw Squares in Rectangle</div>
+            <div class="infoSec">
+                <br> <span>This tool for calculate max size of square that can fit in a rectangle without any gap.
+                    please enter width and height for a rectangle, make sure they are > 0, also you can pick the color of the rectangle.</span>
+            </div>
+            <div class="label">
+                Width:  <input class="input" type="number" min="1" step="1" ng-model="width" oninput="validity.valid||(value='');" required/>
+            </div>
+            <div class="label">
+                Height: <input class="input" type="number" min="1" step="1" ng-model="height" oninput="validity.valid||(value='');" required/>
+            </div>
+            <div class="label">
+                Pick table Color: <input colorpicker class="input" type="text" ng-model="pickedColor" ng-style="{background:pickedColor}" />
+            </div>
+            <div class="label">
+                Pick scale: <select ng-model="scale" ng-options="x for x in scales">
+                </select>
+            </div>
+
+            <div class="button_wrapper">
+                <button class="button" ng-click="draw()">Draw</button>
+            </div>
+
+            <div class="error" ng-if="error"> {{ error}} </div>
+
+            <div ng-if="squares">
+                <div class="info">
+                        <b>Square Dimension: </b>{{squares.squareDimension}} <span style="color:red; font-size: 100% ">X</span> {{squares.squareDimension}}
+                        <br>
+                    <b>Rows: </b>{{squares.rows}} <span style="color:red; font-size: 250% ">|</span> <b>Columns: </b>{{squares.column}} <span style="color:red; font-size: 250% ">|</span>  <b>Squares Number:</b> {{squares.numberOfSquares}}
+                    <br>
+                   
+                </div>
+                <div class="error" ng-if="squares.numberOfSquares > maxSquareNumbers">
+                    Sorry, We cannot draw due to the large number of squares, max squares are {{maxSquareNumbers}}
+                </div>
+                <div ng-if="squares.numberOfSquares <= maxSquareNumbers">
+                    <span style="color:blue; font-size: 75%; font-style: italic">Note: Showing the squares based on {{scale}} pixel scale</span>
+                    <br> <br>
+
+                <table class="rectangle" ng-style="{fontSize: 1+ 'px'}">
+                    <tr ng-repeat="tr in [].constructor(squares.rows) track by $index" ng-style="{background:pickedColor}" ng-init="trNumber = $index">
+                        <td ng-repeat="td in [].constructor(squares.column) track by $index" ng-init="tdNumber = $index + 1"
+                            ng-style="{ width:scale + 'px', height:scale + 'px' }">
+                                
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
